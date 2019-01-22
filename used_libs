@@ -1,0 +1,14 @@
+libc.so.6
+libcfitsio.so.3
+libcurl.so.4
+libdl.so.2
+libgcc_s.so.1
+libgsl.so.23
+libgslcblas.so.0
+libjpeg.so.62
+libm.so.6
+libnova-0.15.so.0
+libpthread.so.0
+libstdc++.so.6
+libusb-1.0.so.0
+libz.so.1
