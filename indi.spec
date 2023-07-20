@@ -5,13 +5,14 @@
 #
 Name     : indi
 Version  : 2.0.2
-Release  : 2
+Release  : 3
 URL      : https://github.com/indilib/indi/archive/v2.0.2/indi-2.0.2.tar.gz
 Source0  : https://github.com/indilib/indi/archive/v2.0.2/indi-2.0.2.tar.gz
 Summary  : Instrument Neutral Distributed Interface
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0 GPL-2.0+ LGPL-2.0+ LGPL-2.1
 Requires: indi-bin = %{version}-%{release}
+Requires: indi-config = %{version}-%{release}
 Requires: indi-data = %{version}-%{release}
 Requires: indi-lib = %{version}-%{release}
 Requires: indi-license = %{version}-%{release}
@@ -45,10 +46,19 @@ data acquisition, monitoring, and a lot more.
 Summary: bin components for the indi package.
 Group: Binaries
 Requires: indi-data = %{version}-%{release}
+Requires: indi-config = %{version}-%{release}
 Requires: indi-license = %{version}-%{release}
 
 %description bin
 bin components for the indi package.
+
+
+%package config
+Summary: config components for the indi package.
+Group: Default
+
+%description config
+config components for the indi package.
 
 
 %package data
@@ -99,7 +109,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689802441
+export SOURCE_DATE_EPOCH=1689836615
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -115,7 +125,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1689802441
+export SOURCE_DATE_EPOCH=1689836615
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/indi
 cp %{_builddir}/indi-%{version}/COPYING.BSD %{buildroot}/usr/share/package-licenses/indi/c237597680be0db41fc5ca7249bc540b8825371e || :
@@ -126,11 +136,14 @@ cp %{_builddir}/indi-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/
 pushd clr-build
 %make_install
 popd
+## install_append content
+mkdir -p %{buildroot}/usr/lib/udev/rules.d/
+
+mv %{buildroot}/lib/udev/rules.d/* %{buildroot}/usr/lib/udev/rules.d/
+## install_append end
 
 %files
 %defattr(-,root,root,-)
-/lib/udev/rules.d/80-dbk21-camera.rules
-/lib/udev/rules.d/99-indi_auxiliary.rules
 /usr/usr/lib64/indi/MathPlugins/libindi_Nearest_MathPlugin.so
 /usr/usr/lib64/indi/MathPlugins/libindi_SVD_MathPlugin.so
 
@@ -292,6 +305,11 @@ popd
 /usr/bin/indi_xagyl_wheel
 /usr/bin/indiserver
 /usr/bin/shelyak_usis
+
+%files config
+%defattr(-,root,root,-)
+/usr/lib/udev/rules.d/80-dbk21-camera.rules
+/usr/lib/udev/rules.d/99-indi_auxiliary.rules
 
 %files data
 %defattr(-,root,root,-)

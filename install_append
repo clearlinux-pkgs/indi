@@ -1,0 +1,3 @@
+mkdir -p %{buildroot}/usr/lib/udev/rules.d/
+
+mv %{buildroot}/lib/udev/rules.d/* %{buildroot}/usr/lib/udev/rules.d/
