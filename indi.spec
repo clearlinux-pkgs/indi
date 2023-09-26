@@ -4,10 +4,10 @@
 # Using build pattern: cmake
 #
 Name     : indi
-Version  : 2.0.2
-Release  : 3
-URL      : https://github.com/indilib/indi/archive/v2.0.2/indi-2.0.2.tar.gz
-Source0  : https://github.com/indilib/indi/archive/v2.0.2/indi-2.0.2.tar.gz
+Version  : 2.0.3
+Release  : 4
+URL      : https://github.com/indilib/indi/archive/v2.0.3/indi-2.0.3.tar.gz
+Source0  : https://github.com/indilib/indi/archive/v2.0.3/indi-2.0.3.tar.gz
 Summary  : Instrument Neutral Distributed Interface
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0 GPL-2.0+ LGPL-2.0+ LGPL-2.1
@@ -101,15 +101,15 @@ license components for the indi package.
 
 
 %prep
-%setup -q -n indi-2.0.2
-cd %{_builddir}/indi-2.0.2
+%setup -q -n indi-2.0.3
+cd %{_builddir}/indi-2.0.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689836615
+export SOURCE_DATE_EPOCH=1695772307
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -125,7 +125,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1689836615
+export SOURCE_DATE_EPOCH=1695772307
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/indi
 cp %{_builddir}/indi-%{version}/COPYING.BSD %{buildroot}/usr/share/package-licenses/indi/c237597680be0db41fc5ca7249bc540b8825371e || :
@@ -201,8 +201,6 @@ mv %{buildroot}/lib/udev/rules.d/* %{buildroot}/usr/lib/udev/rules.d/
 /usr/bin/indi_lx200_TeenAstro
 /usr/bin/indi_lx200_pegasus_nyx101
 /usr/bin/indi_lx200am5
-/usr/bin/indi_lx200ap
-/usr/bin/indi_lx200ap_gtocp2
 /usr/bin/indi_lx200ap_v2
 /usr/bin/indi_lx200autostar
 /usr/bin/indi_lx200basic
@@ -437,13 +435,13 @@ mv %{buildroot}/lib/udev/rules.d/* %{buildroot}/usr/lib/udev/rules.d/
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libindiAlignmentDriver.so.2
-/usr/lib64/libindiAlignmentDriver.so.2.0.2
+/usr/lib64/libindiAlignmentDriver.so.2.0.3
 /usr/lib64/libindiclient.so.2
-/usr/lib64/libindiclient.so.2.0.2
+/usr/lib64/libindiclient.so.2.0.3
 /usr/lib64/libindidriver.so.2
-/usr/lib64/libindidriver.so.2.0.2
+/usr/lib64/libindidriver.so.2.0.3
 /usr/lib64/libindilx200.so.2
-/usr/lib64/libindilx200.so.2.0.2
+/usr/lib64/libindilx200.so.2.0.3
 
 %files license
 %defattr(0644,root,root,0755)
