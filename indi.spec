@@ -4,10 +4,10 @@
 # Using build pattern: cmake
 #
 Name     : indi
-Version  : 2.0.3
-Release  : 4
-URL      : https://github.com/indilib/indi/archive/v2.0.3/indi-2.0.3.tar.gz
-Source0  : https://github.com/indilib/indi/archive/v2.0.3/indi-2.0.3.tar.gz
+Version  : 2.0.4
+Release  : 5
+URL      : https://github.com/indilib/indi/archive/v2.0.4/indi-2.0.4.tar.gz
+Source0  : https://github.com/indilib/indi/archive/v2.0.4/indi-2.0.4.tar.gz
 Summary  : Instrument Neutral Distributed Interface
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0 GPL-2.0+ LGPL-2.0+ LGPL-2.1
@@ -101,31 +101,51 @@ license components for the indi package.
 
 
 %prep
-%setup -q -n indi-2.0.3
-cd %{_builddir}/indi-2.0.3
+%setup -q -n indi-2.0.4
+cd %{_builddir}/indi-2.0.4
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1695772307
+export SOURCE_DATE_EPOCH=1696358612
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
+ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 %cmake .. -DLIBEV_INCLUDE_DIR=/usr/include/libev
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1695772307
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
+ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
+export SOURCE_DATE_EPOCH=1696358612
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/indi
 cp %{_builddir}/indi-%{version}/COPYING.BSD %{buildroot}/usr/share/package-licenses/indi/c237597680be0db41fc5ca7249bc540b8825371e || :
@@ -243,6 +263,7 @@ mv %{buildroot}/lib/udev/rules.d/* %{buildroot}/usr/lib/udev/rules.d/
 /usr/bin/indi_pegasusindigo_wheel
 /usr/bin/indi_perfectstar_focus
 /usr/bin/indi_planewave_deltat
+/usr/bin/indi_planewave_telescope
 /usr/bin/indi_pmc8_telescope
 /usr/bin/indi_pyxis_rotator
 /usr/bin/indi_qhycfw1_wheel
@@ -352,6 +373,7 @@ mv %{buildroot}/lib/udev/rules.d/* %{buildroot}/usr/lib/udev/rules.d/
 /usr/include/libindi/fitsidi.h
 /usr/include/libindi/fitskeyword.h
 /usr/include/libindi/hidapi.h
+/usr/include/libindi/httplib.h
 /usr/include/libindi/indiapi.h
 /usr/include/libindi/indibase.h
 /usr/include/libindi/indibasetypes.h
@@ -371,6 +393,7 @@ mv %{buildroot}/lib/udev/rules.d/* %{buildroot}/usr/lib/udev/rules.d/
 /usr/include/libindi/indifocuser.h
 /usr/include/libindi/indifocuserinterface.h
 /usr/include/libindi/indigps.h
+/usr/include/libindi/indigpsinterface.h
 /usr/include/libindi/indiguiderinterface.h
 /usr/include/libindi/indilightboxinterface.h
 /usr/include/libindi/indilogger.h
@@ -400,6 +423,7 @@ mv %{buildroot}/lib/udev/rules.d/* %{buildroot}/usr/lib/udev/rules.d/
 /usr/include/libindi/indiweatherinterface.h
 /usr/include/libindi/indiwidgettraits.h
 /usr/include/libindi/indiwidgetview.h
+/usr/include/libindi/inicpp.h
 /usr/include/libindi/json.h
 /usr/include/libindi/libastro.h
 /usr/include/libindi/lilxml.h
@@ -435,13 +459,13 @@ mv %{buildroot}/lib/udev/rules.d/* %{buildroot}/usr/lib/udev/rules.d/
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libindiAlignmentDriver.so.2
-/usr/lib64/libindiAlignmentDriver.so.2.0.3
+/usr/lib64/libindiAlignmentDriver.so.2.0.4
 /usr/lib64/libindiclient.so.2
-/usr/lib64/libindiclient.so.2.0.3
+/usr/lib64/libindiclient.so.2.0.4
 /usr/lib64/libindidriver.so.2
-/usr/lib64/libindidriver.so.2.0.3
+/usr/lib64/libindidriver.so.2.0.4
 /usr/lib64/libindilx200.so.2
-/usr/lib64/libindilx200.so.2.0.3
+/usr/lib64/libindilx200.so.2.0.4
 
 %files license
 %defattr(0644,root,root,0755)
