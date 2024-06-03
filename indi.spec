@@ -7,7 +7,7 @@
 #
 Name     : indi
 Version  : 2.0.8
-Release  : 8
+Release  : 9
 URL      : https://github.com/indilib/indi/archive/v2.0.8/indi-2.0.8.tar.gz
 Source0  : https://github.com/indilib/indi/archive/v2.0.8/indi-2.0.8.tar.gz
 Summary  : Instrument Neutral Distributed Interface
