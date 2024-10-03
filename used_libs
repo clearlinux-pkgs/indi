@@ -1,10 +1,9 @@
 libc.so.6
 libcfitsio.so.10
 libcurl.so.4
-libev.so.4
 libfftw3.so.3
 libgcc_s.so.1
-libgsl.so.27
+libgsl.so.28
 libgslcblas.so.0
 libjpeg.so.62
 libm.so.6
