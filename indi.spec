@@ -7,7 +7,7 @@
 #
 Name     : indi
 Version  : 2.1.0
-Release  : 15
+Release  : 16
 URL      : https://github.com/indilib/indi/archive/v2.1.0/indi-2.1.0.tar.gz
 Source0  : https://github.com/indilib/indi/archive/v2.1.0/indi-2.1.0.tar.gz
 Summary  : Instrument Neutral Distributed Interface
