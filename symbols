@@ -601,6 +601,7 @@ libindiclient.so.2:TcpSocketPrivate::processSocket()
 libindiclient.so.2:TcpSocketPrivate::setNonblockSocket()
 libindiclient.so.2:TcpSocketPrivate::setSocketState(TcpSocket::SocketState)
 libindiclient.so.2:TcpSocketPrivate::waitForConnectedSockets()
+libindiclient.so.2:TcpSocketPrivate::~TcpSocketPrivate()
 libindiclient.so.2:addXMLAtt
 libindiclient.so.2:addXMLEle
 libindiclient.so.2:as2rad
